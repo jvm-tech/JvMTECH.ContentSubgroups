@@ -1,0 +1,26 @@
+{
+    "name": "jvmtech/content-subgroups",
+    "description": "Reduce the amount of Content Types (Neos CMS NodeTypes) by creating subgroups and specific migrations to easily switch between them.",
+    "type": "neos-package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jung von Matt TECH",
+            "homepage": "https://jvmtech.ch",
+            "role": "Company"
+        }
+    ],
+    "require": {
+        "neos/neos": ">=8.3 <9.0 || dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "JvMTECH\\ContentSubgroups\\": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "JvMTECH.ContentSubgroups"
+        }
+    }
+}

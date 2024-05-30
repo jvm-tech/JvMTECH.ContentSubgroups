@@ -1,0 +1,27 @@
+'JvMTECH.ContentSubgroups:Enable':
+  abstract: true
+  options:
+    nodeCreationHandlers:
+      contentSubgroups:
+        position: 'after creationDialogProperties'
+        nodeCreationHandler: 'JvMTECH\ContentSubgroups\NodeCreationHandler\NodeTypeNodeCreationHandler'
+  properties:
+    targetNodeTypeName:
+      type: string
+      defaultValue: ''
+      ui:
+        label: 'Content Type'
+        showInCreationDialog: true
+        reloadIfChanged: true
+        inspector:
+          group: 'type'
+          position: 101
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            dataSourceIdentifier: 'jvmtech-contentsubgroups-target-nodetypes'
+#            dataSourceAdditionalData:
+#              contentSubgroup: 'text'
+    _nodeType:
+      ui:
+        inspector:
+          hidden: true
