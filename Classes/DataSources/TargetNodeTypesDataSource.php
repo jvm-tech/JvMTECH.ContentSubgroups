@@ -75,9 +75,9 @@ class TargetNodeTypesDataSource extends AbstractDataSource
         // Search for NodeType Subgroups...
 
         $subNodeTypes = array_filter($nodeTypes, function (NodeType $nodeType) use ($baseTag, $contentCollectionNode) {
-            if (!$contentCollectionNode->isNodeTypeAllowedAsChildNode($nodeType)) {
-                return false;
-            }
+            // if (!$contentCollectionNode->isNodeTypeAllowedAsChildNode($nodeType)) {
+            //     return false;
+            // }
 
             $tags = Arrays::getValueByPath($nodeType->getOptions(), 'contentSubgroup.tags');
             if (!$tags) {
