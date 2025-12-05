@@ -5,7 +5,7 @@ namespace JvMTECH\ContentSubgroups\DataSources;
 
 use Neos\ContentRepository\Core\NodeType\NodeType;
 use Neos\ContentRepository\Core\Projection\ContentGraph\Node;
-use Neos\ContentRepositoryRegistry\Factory\NodeTypeManager\NodeTypeManagerFactoryInterface;
+use Neos\ContentRepositoryRegistry\ContentRepositoryRegistry;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\I18n\EelHelper\TranslationHelper;
 use Neos\Neos\Service\DataSource\AbstractDataSource;
@@ -18,11 +18,12 @@ class TargetNodeTypesDataSource extends AbstractDataSource
     /** @var string */
     protected static $identifier = 'jvmtech-contentsubgroups-target-nodetypes';
     #[Flow\Inject]
-    protected NodeTypeManagerFactoryInterface $nodeTypeManagerFactory;
-    #[Flow\Inject]
     protected TranslationHelper $translationHelper;
     #[Flow\Inject]
     protected IconNameMappingService $iconNameMappingService;
+
+    #[Flow\Inject]
+    protected ContentRepositoryRegistry $contentRepositoryRegistry;
 
     public function getData(?Node $node = null, array $arguments = []): array
     {
@@ -30,7 +31,7 @@ class TargetNodeTypesDataSource extends AbstractDataSource
             return [];
         }
 
-        $nodeTypeManager = $this->nodeTypeManagerFactory->build($node->contentRepositoryId, []);
+        $nodeTypeManager = $this->contentRepositoryRegistry->get($node->contentRepositoryId)->getNodeTypeManager();
         $baseTag = Arrays::getValueByPath($arguments, 'contentSubgroup');
 
         $nodeTypes = $nodeTypeManager->getNodeTypes(false);
