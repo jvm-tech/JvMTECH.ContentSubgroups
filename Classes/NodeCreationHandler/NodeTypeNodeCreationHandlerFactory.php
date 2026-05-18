@@ -49,6 +49,8 @@ class NodeTypeNodeCreationHandlerFactory implements NodeCreationHandlerFactoryIn
                         ])
                     );
                 }
+
+                return $commands;
             }
         };
     }
