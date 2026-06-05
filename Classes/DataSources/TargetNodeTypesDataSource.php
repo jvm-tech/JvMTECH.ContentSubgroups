@@ -75,9 +75,13 @@ class TargetNodeTypesDataSource extends AbstractDataSource
         });
 
         $subNodeTypes = array_map(function (NodeType $nodeType) {
-
+            $description = $nodeType->getConfiguration('ui.help.message');
+            if ($description) {
+                $description = $this->translationHelper->translate($description) ?: $description;
+            }
             return [
                 'label' => $nodeType->getLabel(),
+                'description' => $description,
                 'value' => $nodeType->name->value,
                 'tags' => Arrays::getValueByPath($nodeType->getOptions(), 'contentSubgroup.tags') ?: [],
                 'icon' => $this->iconNameMappingService->convert($nodeType->getConfiguration('ui.icon')),
@@ -99,6 +103,7 @@ class TargetNodeTypesDataSource extends AbstractDataSource
                     'label' => $subNodeType['label'],
                     'value' => $subNodeType['value'],
                     'icon' => $subNodeType['icon'],
+                    'description' => $subNodeType['description'],
                     'group' => isset($groups[$tag]['label']) ? $groups[$tag]['label'] : null,
                 ];
             }
